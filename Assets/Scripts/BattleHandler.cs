@@ -1,36 +1,78 @@
+using System;
 using UnityEngine;
 
 public class BattleHandler : MonoBehaviour
 {
+	private static BattleHandler instance;
+
+	public static BattleHandler GetInstance()
+	{
+		return instance;
+	}
+	
 	//will be chosen by the player
 	[SerializeField]
     private Transform prefabHero;
 	[SerializeField]
 	private Transform prefabEnemy;
+	private CharacterBattle playerCharacterBattle;
+	private CharacterBattle enemyCharacterBattle;
+	private Action onStateChanged;
+	private State state;
+	
+	public enum State
+	{
+		WaitingForPlayer,
+		Busy,
+	}
+
+	public State GetState()
+	{
+		return state;
+	}
+
+	public CharacterBattle GetPlayer()
+	{
+		return playerCharacterBattle;
+	}
+	
+	private void Awake()
+	{
+		instance = this;
+	}
 
 	private void Start()
 	{
-		SpawnHero();
-		SpawnEnemy();
+		playerCharacterBattle = SpawnHero();
+		enemyCharacterBattle = SpawnEnemy();
+		ChangeState(State.WaitingForPlayer);
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyUp(KeyCode.Space)) 
-		{ 
-			//test animation
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			playerCharacterBattle.Attack();
 		}
 	}
 
-	private void SpawnHero()
+	private CharacterBattle SpawnHero()
 	{
 		Vector3 position = new Vector3(-2.5f, 0);
-		Instantiate(prefabHero, position, Quaternion.identity);
+		Transform characterTransform = Instantiate(prefabHero, position, Quaternion.identity);
+		return characterTransform.GetComponent<CharacterBattle>();
 	}
 
-	private void SpawnEnemy()
+	private CharacterBattle SpawnEnemy()
 	{
 		Vector3 position = new Vector3(2.5f, 0);
-		Instantiate(prefabEnemy, position, Quaternion.identity);
+		Transform characterTransform = Instantiate(prefabEnemy, position, Quaternion.identity);
+		return characterTransform.GetComponent<CharacterBattle>();
+	}
+
+	private void ChangeState(State newState)
+	{
+		state = newState;
+		onStateChanged();
 	}
 }

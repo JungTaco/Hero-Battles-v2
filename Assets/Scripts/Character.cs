@@ -3,16 +3,17 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField]
-    private Animation idleAnimation;
+    private AnimationClip idleAnimation;
+	[SerializeField] 
+	private AnimationClip slideAnimation;
 	[SerializeField]
-    private Animation slideAnimation;
-	[SerializeField]
-    private Animation attackAnimation;
+	private AnimationClip attackAnimation;
+    private Animator anim;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
-    {
-        
+    {	
+	    anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -23,11 +24,11 @@ public class Character : MonoBehaviour
 
 	public void PlaySlideAnimation()
 	{
-		slideAnimation.Play();
+		
 	}
 
 	public void PlayAttackAnimation()
 	{
-		attackAnimation.Play();
+		anim.SetTrigger("TrAttack");
 	}
 }

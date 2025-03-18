@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2390712160762359346}
   - component: {fileID: 4655180718078580807}
+  - component: {fileID: -4324070847537310081}
   m_Layer: 0
   m_Name: Enemy01
   m_TagString: Untagged
@@ -45,6 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcd3adca231ba149a5f5d234e74e622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleAnimation: {fileID: 7400000, guid: f48f9abb2bef1fc41847614ec3669972, type: 2}
+  slideAnimation: {fileID: 7400000, guid: aa73f3b62a8a281489d06f6563dd2e14, type: 2}
+  attackAnimation: {fileID: 7400000, guid: 247d3fab2a204ab43b7e11e24a830331, type: 2}
+--- !u!114 &-4324070847537310081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367886034681943915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b13a2740e495c469b9e57dfd3361a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4002677997683516755
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 4002677997683516755}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
