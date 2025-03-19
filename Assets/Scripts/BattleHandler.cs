@@ -17,7 +17,7 @@ public class BattleHandler : MonoBehaviour
 	private Transform prefabEnemy;
 	private CharacterBattle playerCharacterBattle;
 	private CharacterBattle enemyCharacterBattle;
-	private Action onStateChanged;
+	
 	private State state;
 	
 	public enum State
@@ -35,6 +35,11 @@ public class BattleHandler : MonoBehaviour
 	{
 		return playerCharacterBattle;
 	}
+
+	public CharacterBattle GetEnemy()
+	{
+		return enemyCharacterBattle;
+	}
 	
 	private void Awake()
 	{
@@ -45,15 +50,23 @@ public class BattleHandler : MonoBehaviour
 	{
 		playerCharacterBattle = SpawnHero();
 		enemyCharacterBattle = SpawnEnemy();
-		ChangeState(State.WaitingForPlayer);
+		//ChangeState(State.WaitingForPlayer);
+		state = State.WaitingForPlayer;
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			playerCharacterBattle.Attack();
-		}
+
+	}
+
+	private void OnEnable()
+	{
+		Actions.OnAttackFinished += ChangeState;
+	}
+
+	private void OnDisable()
+	{
+		Actions.OnAttackFinished -= ChangeState;
 	}
 
 	private CharacterBattle SpawnHero()
@@ -70,9 +83,25 @@ public class BattleHandler : MonoBehaviour
 		return characterTransform.GetComponent<CharacterBattle>();
 	}
 
-	private void ChangeState(State newState)
+	private void ChangeState(bool isPlayerAttackFinished)
 	{
+		State newState;
+		if (isPlayerAttackFinished)
+		{
+			newState = State.Busy;
+		}
+		else
+		{
+			newState = State.WaitingForPlayer;
+		}
+		Actions.OnStateChanged?.Invoke(newState);
 		state = newState;
-		onStateChanged();
+	}
+
+	//use the enemyCharacterBattle as target
+	public void PlayerAttack()
+	{
+		//slide etc
+		playerCharacterBattle.Attack();
 	}
 }

@@ -1,17 +1,24 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleMenuButton : MonoBehaviour
 {
     protected Button Button;
-    private BattleHandler battleHandler;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Awake()
     {
         Button = GetComponent<Button>();
-        battleHandler = BattleHandler.GetInstance();
-        // something
+    }
+
+    private void OnEnable()
+    {
+        Actions.OnStateChanged += ChangeButtonState;
+    }
+
+    private void OnDisable()
+    {
+        Actions.OnStateChanged -= ChangeButtonState;
     }
 
     private void Enable()
@@ -24,9 +31,9 @@ public class BattleMenuButton : MonoBehaviour
         Button.interactable = false;
     }
 
-    private void ChangeButtonState()
+    private void ChangeButtonState(BattleHandler.State newState)
     {
-        if (battleHandler.GetState() == BattleHandler.State.WaitingForPlayer)
+        if (newState == BattleHandler.State.WaitingForPlayer)
         {
             Enable();
         }

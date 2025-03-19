@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbcd3adca231ba149a5f5d234e74e622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   idleAnimation: {fileID: 7400000, guid: 91dd5a3d92831ca44a504e4d5233d9c2, type: 2}
   slideAnimation: {fileID: 7400000, guid: a7c5cba5c1c1330469ba00d785e246f4, type: 2}
   attackAnimation: {fileID: 7400000, guid: adef6250ca5db72448a395b2e0e542dc, type: 2}

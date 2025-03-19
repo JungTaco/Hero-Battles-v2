@@ -2,14 +2,24 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField]
+	[SerializeField]
+	private bool isPlayer;
+	[SerializeField]
     private AnimationClip idleAnimation;
 	[SerializeField] 
 	private AnimationClip slideAnimation;
 	[SerializeField]
 	private AnimationClip attackAnimation;
     private Animator anim;
+    
+    private static readonly int TrAttack = Animator.StringToHash("TrAttack");
+    private static readonly int IsSliding = Animator.StringToHash("IsSliding");
 
+    public bool GetIsPlayer()
+    {
+	    return isPlayer;
+    }
+    
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
     {	
@@ -21,14 +31,14 @@ public class Character : MonoBehaviour
     {
         
     }
-
-	public void PlaySlideAnimation()
-	{
-		
-	}
-
+	
 	public void PlayAttackAnimation()
 	{
-		anim.SetTrigger("TrAttack");
+		anim.SetTrigger(TrAttack);
+	}
+	
+	public void PlaySlideAnimation()
+	{
+		anim.SetBool(IsSliding, true);
 	}
 }
