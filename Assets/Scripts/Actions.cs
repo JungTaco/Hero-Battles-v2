@@ -3,6 +3,6 @@ using UnityEngine;
 
 public static class Actions
 {
-    public static Action<BattleHandler.State> OnStateChanged;
-    public static Action<bool> OnAttackFinished;
+    public static Action<BattleHandler.PlayerState> OnStateChanged;
+    public static Action OnAttackFinished;
 }

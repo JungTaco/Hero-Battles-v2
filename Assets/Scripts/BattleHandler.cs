@@ -18,15 +18,15 @@ public class BattleHandler : MonoBehaviour
 	private CharacterBattle playerCharacterBattle;
 	private CharacterBattle enemyCharacterBattle;
 	
-	private State state;
+	private PlayerState state;
 	
-	public enum State
+	public enum PlayerState
 	{
-		WaitingForPlayer,
-		Busy,
+		Ready,
+		Waiting,
 	}
 
-	public State GetState()
+	public PlayerState GetState()
 	{
 		return state;
 	}
@@ -51,7 +51,7 @@ public class BattleHandler : MonoBehaviour
 		playerCharacterBattle = SpawnHero();
 		enemyCharacterBattle = SpawnEnemy();
 		//ChangeState(State.WaitingForPlayer);
-		state = State.WaitingForPlayer;
+		state = PlayerState.Ready;
 	}
 
 	private void Update()
@@ -61,12 +61,12 @@ public class BattleHandler : MonoBehaviour
 
 	private void OnEnable()
 	{
-		Actions.OnAttackFinished += ChangeState;
+		//Actions.OnAttackFinished += ChangeState;
 	}
 
 	private void OnDisable()
 	{
-		Actions.OnAttackFinished -= ChangeState;
+		//Actions.OnAttackFinished -= ChangeState;
 	}
 
 	private CharacterBattle SpawnHero()
@@ -83,25 +83,23 @@ public class BattleHandler : MonoBehaviour
 		return characterTransform.GetComponent<CharacterBattle>();
 	}
 
-	private void ChangeState(bool isPlayerAttackFinished)
+	public void ChangeState(PlayerState newState)
 	{
-		State newState;
-		if (isPlayerAttackFinished)
-		{
-			newState = State.Busy;
-		}
-		else
-		{
-			newState = State.WaitingForPlayer;
-		}
-		Actions.OnStateChanged?.Invoke(newState);
 		state = newState;
+		Actions.OnStateChanged?.Invoke(newState);
 	}
-
-	//use the enemyCharacterBattle as target
-	public void PlayerAttack()
+	
+	public void Attack()
 	{
-		//slide etc
-		playerCharacterBattle.Attack();
+		if (state == PlayerState.Ready)
+		{
+			playerCharacterBattle.Attack(enemyCharacterBattle);
+			//ChangeState(PlayerState.Waiting);
+		}
+		else 
+		{
+			enemyCharacterBattle.Attack(playerCharacterBattle);
+			//ChangeState(PlayerState.Ready);
+		}
 	}
 }

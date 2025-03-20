@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 166171172}
   - component: {fileID: 166171171}
   - component: {fileID: 166171170}
+  - component: {fileID: 166171173}
   m_Layer: 5
   m_Name: SpellButton
   m_TagString: Untagged
@@ -239,6 +240,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166171168}
   m_CullTransparentMesh: 1
+--- !u!114 &166171173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166171168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b3e824e4dc97a46a39e4a11578a647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +522,7 @@ GameObject:
   - component: {fileID: 929748884}
   - component: {fileID: 929748883}
   - component: {fileID: 929748882}
+  - component: {fileID: 929748885}
   m_Layer: 5
   m_Name: HPPotionButton
   m_TagString: Untagged
@@ -617,6 +631,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929748880}
   m_CullTransparentMesh: 1
+--- !u!114 &929748885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929748880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b3e824e4dc97a46a39e4a11578a647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &983962519
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,6 +734,7 @@ GameObject:
   - component: {fileID: 1549043329}
   - component: {fileID: 1549043328}
   - component: {fileID: 1549043327}
+  - component: {fileID: 1549043330}
   m_Layer: 5
   m_Name: DefendButton
   m_TagString: Untagged
@@ -816,6 +843,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549043325}
   m_CullTransparentMesh: 1
+--- !u!114 &1549043330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549043325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b3e824e4dc97a46a39e4a11578a647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1568769787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1189,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2073115597}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1726293063}
+        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2073115599}
+        m_TargetAssemblyTypeName: BattleMenuButton, Assembly-CSharp
+        m_MethodName: ChangePlayerState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2073115597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1198,7 +1261,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073115594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ba9d59d0297fd4eb7ff0fb58e47832, type: 3}
+  m_Script: {fileID: 11500000, guid: a7b3e824e4dc97a46a39e4a11578a647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807

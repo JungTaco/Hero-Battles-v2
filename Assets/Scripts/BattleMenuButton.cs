@@ -5,15 +5,23 @@ using UnityEngine.UI;
 public class BattleMenuButton : MonoBehaviour
 {
     protected Button Button;
+	protected BattleHandler battleHandler;
 
-    private void Awake()
-    {
-        Button = GetComponent<Button>();
-    }
 
-    private void OnEnable()
+	private void Awake()
     {
-        Actions.OnStateChanged += ChangeButtonState;
+		Button = GetComponent<Button>();
+	}
+
+	private void Start()
+	{
+		battleHandler = BattleHandler.GetInstance();
+		//Button.onClick.AddListener(battleHandler.ChangeState(BattleHandler.State.Busy));
+	}
+
+	private void OnEnable()
+    {
+		Actions.OnStateChanged += ChangeButtonState;
     }
 
     private void OnDisable()
@@ -31,9 +39,9 @@ public class BattleMenuButton : MonoBehaviour
         Button.interactable = false;
     }
 
-    private void ChangeButtonState(BattleHandler.State newState)
+    private void ChangeButtonState(BattleHandler.PlayerState newState)
     {
-        if (newState == BattleHandler.State.WaitingForPlayer)
+        if (newState == BattleHandler.PlayerState.Ready)
         {
             Enable();
         }
@@ -42,4 +50,10 @@ public class BattleMenuButton : MonoBehaviour
             Disable();
         }
     }
+
+    public void ChangePlayerState()
+    {
+		battleHandler.ChangeState(BattleHandler.PlayerState.Waiting);
+
+	}
 }
