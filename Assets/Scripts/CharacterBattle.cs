@@ -5,11 +5,11 @@ public class CharacterBattle : MonoBehaviour
 {
     private Character character;
     private bool isSliding;
-    private Vector3 startPosition;
-    private Vector3 slideTargetPosition;
+	private bool isActiveCharacter;
+	private Vector3 slideTargetPosition;
     private Action onSlideComplete;
-    
-    private void Awake()
+
+	private void Awake()
     {
         character = GetComponent<Character>();
     }
@@ -17,71 +17,80 @@ public class CharacterBattle : MonoBehaviour
     private void Start()
     {
         isSliding = false;
-		startPosition = GetPosition();
-
+        isActiveCharacter = false;
 	}
 
     private void Update()
     {
-        float slideSpeed = 10f;
         if (isSliding)
         {
-            transform.position += (slideTargetPosition - GetPosition()) * (slideSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(GetPosition(), slideTargetPosition) < 1f)
-            {
-                transform.position = slideTargetPosition;
-                onSlideComplete?.Invoke();
-            }
+            Slide();
         }
     }
 
 	private void OnEnable()
 	{
-		
+        Actions.OnAttackFinished += SlideToOriginalPosition;
 	}
 
 	private void OnDisable()
 	{
-		
+		Actions.OnAttackFinished -= SlideToOriginalPosition;
 	}
 
 	public void Attack(CharacterBattle target)
     {
+        isActiveCharacter = true;
         Vector3 targetPosition = target.GetPosition() + (GetPosition() - target.GetPosition()).normalized;
         Vector3 startPosition = GetPosition();
         
         //slide to taget
-        SlideToPosition(targetPosition, () =>
+        SetSlideValues(targetPosition, () =>
         {
-            //arrived to target
+            //arrived to target: stop sliding and attack
             isSliding = false;
             character.PlayAttackAnimation();
-            
-            //animation event?
 
-            //slide to original position
-            //SlideToPosition(startPosition, () =>
-            //{
-            //    //isSliding = true;
-            //    Actions.OnAttackFinished(character.GetIsPlayer());
-            //    isSliding = false;
-            //});
-        });
+			//set target to original position
+			slideTargetPosition = startPosition;
+		});
         
     }
     
+    private void Slide()
+    {
+		float slideSpeed = 10f;
+		transform.position += (slideTargetPosition - GetPosition()) * (slideSpeed * Time.deltaTime);
+
+		if (Vector3.Distance(GetPosition(), slideTargetPosition) < 1f)
+		{
+			transform.position = slideTargetPosition;
+			onSlideComplete?.Invoke();
+		}
+	}
+
     private Vector3 GetPosition()
     {
         return transform.position;
     }
 
-    private void SlideToPosition(Vector3 slideTargetPosition, Action onSlideComplete)
+    private void SetSlideValues(Vector3 slideTargetPosition, Action onSlideComplete)
     {
         this.slideTargetPosition = slideTargetPosition;
         this.onSlideComplete = onSlideComplete;
         isSliding = true;
+	}
+
+    //when attack animation is finished slides back to original position
+    private void SlideToOriginalPosition()
+    {
+		if (isActiveCharacter)
+		{
+			SetSlideValues(slideTargetPosition, () =>
+			{
+				isSliding = false;
+                isActiveCharacter = false;
+			});
+		}
     }
-    
-    
 }

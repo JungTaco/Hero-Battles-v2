@@ -94,12 +94,10 @@ public class BattleHandler : MonoBehaviour
 		if (state == PlayerState.Ready)
 		{
 			playerCharacterBattle.Attack(enemyCharacterBattle);
-			//ChangeState(PlayerState.Waiting);
 		}
 		else 
 		{
 			enemyCharacterBattle.Attack(playerCharacterBattle);
-			//ChangeState(PlayerState.Ready);
 		}
 	}
 }
