@@ -42,7 +42,7 @@ public class CharacterBattle : MonoBehaviour
         isSliding = false;
 		healthSystem = new HealthSystem(100);
         //TO DO: set depending on what level and what class character is
-		damageAmounts = new DamageAmounts(10, 5);
+		damageAmounts = new DamageAmounts(100, 5);
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
 	}
 
@@ -91,6 +91,11 @@ public class CharacterBattle : MonoBehaviour
 			slideTargetPosition = startPosition;
 		});
 	}
+
+    public void HideHPBar() 
+    { 
+        hpBar.gameObject.SetActive(false);
+    }
     
     private void Slide()
     {

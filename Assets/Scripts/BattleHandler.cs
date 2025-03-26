@@ -105,6 +105,8 @@ public class BattleHandler : MonoBehaviour
 	{
 		if (IsBattleOver())
 		{
+			playerCharacterBattle.HideHPBar();
+			enemyCharacterBattle.HideHPBar();
 			return;
 		}
 		if (playerState == PlayerState.TakingAction)
@@ -128,10 +130,12 @@ public class BattleHandler : MonoBehaviour
 	{
 		if (playerCharacterBattle.IsDead())
 		{
+			BattleOverPanel.Show_Static("Enemy won!");
 			return true;
 		}
 		if (enemyCharacterBattle.IsDead()) 
 		{
+			BattleOverPanel.Show_Static("You won!");
 			return true;
 		}
 		return false;
