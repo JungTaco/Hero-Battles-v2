@@ -5,9 +5,32 @@ public class CharacterBattle : MonoBehaviour
 {
     private Character character;
     private bool isSliding;
-	private bool isActiveCharacter;
 	private Vector3 slideTargetPosition;
     private Action onSlideComplete;
+    private HealthSystem healthSystem;
+    private HPBar hpBar;
+    private struct DamageAmounts
+    {
+        private int attackDamage;
+        private int spellDamage;
+
+        public DamageAmounts(int attackDamage, int spellDamage)
+        {
+            this.attackDamage = attackDamage;
+            this.spellDamage = spellDamage;
+        }
+
+        public int GetAttackDamage()
+        {
+            return attackDamage;
+        }
+
+        public int GetSpellDamage()
+        {
+            return spellDamage;
+        }
+	}
+    private DamageAmounts damageAmounts;
 
 	private void Awake()
     {
@@ -17,7 +40,10 @@ public class CharacterBattle : MonoBehaviour
     private void Start()
     {
         isSliding = false;
-        isActiveCharacter = false;
+		healthSystem = new HealthSystem(100);
+        //TO DO: set depending on what level and what class character is
+		damageAmounts = new DamageAmounts(10, 5);
+		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
 	}
 
     private void Update()
@@ -38,9 +64,19 @@ public class CharacterBattle : MonoBehaviour
 		Actions.OnAttackFinished -= SlideToOriginalPosition;
 	}
 
+    public void GetsDamaged(int damage)
+    {
+        healthSystem.GetsDamage(damage);
+        hpBar.UpdateSliderValue(healthSystem.GetHealthPercent());
+    }
+
+    public bool IsDead()
+    {
+        return healthSystem.IsDead();
+    }
+
 	public void Attack(CharacterBattle target)
     {
-        isActiveCharacter = true;
         Vector3 targetPosition = target.GetPosition() + (GetPosition() - target.GetPosition()).normalized;
         Vector3 startPosition = GetPosition();
         
@@ -50,12 +86,11 @@ public class CharacterBattle : MonoBehaviour
             //arrived to target: stop sliding and attack
             isSliding = false;
             character.PlayAttackAnimation();
-
+            target.GetsDamaged(damageAmounts.GetAttackDamage());
 			//set target to original position
 			slideTargetPosition = startPosition;
 		});
-        
-    }
+	}
     
     private void Slide()
     {
@@ -82,15 +117,21 @@ public class CharacterBattle : MonoBehaviour
 	}
 
     //when attack animation is finished slides back to original position
-    private void SlideToOriginalPosition()
+    private void SlideToOriginalPosition(CharacterBattle characterBattle)
     {
-		if (isActiveCharacter)
+		if (ReferenceEquals(this, characterBattle))
 		{
 			SetSlideValues(slideTargetPosition, () =>
 			{
 				isSliding = false;
-                isActiveCharacter = false;
+                FinishTurn();
 			});
 		}
+    }
+
+    private void FinishTurn()
+    {
+        onSlideComplete = null;
+		Actions.OnTurnFinished?.Invoke();
     }
 }

@@ -18,17 +18,18 @@ public class BattleHandler : MonoBehaviour
 	private CharacterBattle playerCharacterBattle;
 	private CharacterBattle enemyCharacterBattle;
 	
-	private PlayerState state;
+	private PlayerState playerState;
 	
 	public enum PlayerState
 	{
 		Ready,
+		TakingAction,
 		Waiting,
 	}
 
 	public PlayerState GetState()
 	{
-		return state;
+		return playerState;
 	}
 
 	public CharacterBattle GetPlayer()
@@ -50,8 +51,7 @@ public class BattleHandler : MonoBehaviour
 	{
 		playerCharacterBattle = SpawnHero();
 		enemyCharacterBattle = SpawnEnemy();
-		//ChangeState(State.WaitingForPlayer);
-		state = PlayerState.Ready;
+		playerState = PlayerState.Ready;
 	}
 
 	private void Update()
@@ -61,12 +61,30 @@ public class BattleHandler : MonoBehaviour
 
 	private void OnEnable()
 	{
-		//Actions.OnAttackFinished += ChangeState;
+		Actions.OnTurnFinished += DecideNextTurn;
 	}
 
 	private void OnDisable()
 	{
-		//Actions.OnAttackFinished -= ChangeState;
+		Actions.OnTurnFinished -= DecideNextTurn;
+	}
+
+	public void ChangePlayerState(PlayerState newState)
+	{
+		playerState = newState;
+		Actions.OnStateChanged?.Invoke(newState);
+	}
+
+	public void Attack()
+	{
+		if (playerState == PlayerState.Ready)
+		{
+			playerCharacterBattle.Attack(enemyCharacterBattle);
+		}
+		else
+		{
+			enemyCharacterBattle.Attack(playerCharacterBattle);
+		}
 	}
 
 	private CharacterBattle SpawnHero()
@@ -83,21 +101,39 @@ public class BattleHandler : MonoBehaviour
 		return characterTransform.GetComponent<CharacterBattle>();
 	}
 
-	public void ChangeState(PlayerState newState)
+	private void DecideNextTurn()
 	{
-		state = newState;
-		Actions.OnStateChanged?.Invoke(newState);
+		if (IsBattleOver())
+		{
+			return;
+		}
+		if (playerState == PlayerState.TakingAction)
+		{
+			ChangePlayerState(PlayerState.Waiting);
+			DoEnemyAction();
+		}
+		else if (playerState == PlayerState.Waiting) 
+		{
+			ChangePlayerState(PlayerState.Ready);
+		}
 	}
-	
-	public void Attack()
+
+	//choses an action for the enemy to do
+	private void DoEnemyAction()
 	{
-		if (state == PlayerState.Ready)
+		Attack();
+	}
+
+	private bool IsBattleOver()
+	{
+		if (playerCharacterBattle.IsDead())
 		{
-			playerCharacterBattle.Attack(enemyCharacterBattle);
+			return true;
 		}
-		else 
+		if (enemyCharacterBattle.IsDead()) 
 		{
-			enemyCharacterBattle.Attack(playerCharacterBattle);
+			return true;
 		}
+		return false;
 	}
 }

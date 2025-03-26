@@ -16,7 +16,6 @@ public class BattleMenuButton : MonoBehaviour
 	private void Start()
 	{
 		battleHandler = BattleHandler.GetInstance();
-		//Button.onClick.AddListener(battleHandler.ChangeState(BattleHandler.State.Busy));
 	}
 
 	private void OnEnable()
@@ -53,7 +52,6 @@ public class BattleMenuButton : MonoBehaviour
 
     public void ChangePlayerState()
     {
-		battleHandler.ChangeState(BattleHandler.PlayerState.Waiting);
-
+		battleHandler.ChangePlayerState(BattleHandler.PlayerState.TakingAction);
 	}
 }

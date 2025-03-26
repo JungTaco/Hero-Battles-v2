@@ -4,12 +4,6 @@ public class Character : MonoBehaviour
 {
 	[SerializeField]
 	private bool isPlayer;
-	[SerializeField]
-    private AnimationClip idleAnimation;
-	[SerializeField] 
-	private AnimationClip slideAnimation;
-	[SerializeField]
-	private AnimationClip attackAnimation;
     private Animator anim;
     
     private static readonly int TrAttack = Animator.StringToHash("TrAttack");

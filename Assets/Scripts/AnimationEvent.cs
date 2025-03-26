@@ -3,8 +3,15 @@ using UnityEngine.Rendering.Universal;
 
 public class AnimationEvent : MonoBehaviour
 {
-    public void FinishAttack()
+    private CharacterBattle characterBattle;
+
+	private void Start()
+	{
+		characterBattle = transform.parent.GetComponent<CharacterBattle>();
+	}
+
+	public void FinishAttack()
     {
-        Actions.OnAttackFinished?.Invoke();
+        Actions.OnAttackFinished?.Invoke(characterBattle);
     }
 }

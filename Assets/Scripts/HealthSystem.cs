@@ -18,7 +18,7 @@ public class HealthSystem
 	public void SetHealthAmount(int health)
 	{
 		this.health = health;
-		if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
+		OnHealthChanged?.Invoke(this, EventArgs.Empty);
 	}
 
 	public float GetHealthPercent()
@@ -31,14 +31,16 @@ public class HealthSystem
 		return health;
 	}
 
-	public void Damage(int amount)
+	public void GetsDamage(int amount)
 	{
 		health -= amount;
 		if (health < 0)
 		{
 			health = 0;
 		}
-		if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
+
+		Debug.Log(health);
+		OnHealthChanged?.Invoke(this, EventArgs.Empty);
 
 		if (health <= 0)
 		{
@@ -48,7 +50,7 @@ public class HealthSystem
 
 	public void Die()
 	{
-		if (OnDead != null) OnDead(this, EventArgs.Empty);
+		OnDead?.Invoke(this, EventArgs.Empty);
 	}
 
 	public bool IsDead()
@@ -63,6 +65,6 @@ public class HealthSystem
 		{
 			health = healthMax;
 		}
-		if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
+		OnHealthChanged?.Invoke(this, EventArgs.Empty);
 	}
 }
