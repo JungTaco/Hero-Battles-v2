@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1170569950235905078}
   - component: {fileID: -6613869744780766429}
   m_Layer: 0
-  m_Name: Hero01
+  m_Name: Hero08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
-  portrait: {fileID: 21300000, guid: c40538b459973674fb47994c6406767b, type: 3}
+  portrait: {fileID: 21300000, guid: 81c9f203bb2076041ad845425ead6360, type: 3}
 --- !u!114 &-6613869744780766429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 778eb27aabdd8b1448132f404c85fdb5, type: 2}
+  - {fileID: 2100000, guid: 9480fefc8a09644479d549c28efed0c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

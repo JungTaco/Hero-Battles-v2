@@ -42,7 +42,7 @@ public class CharacterBattle : MonoBehaviour
         isSliding = false;
 		healthSystem = new HealthSystem(100);
         //TO DO: set depending on what level and what class character is
-		damageAmounts = new DamageAmounts(100, 5);
+		damageAmounts = new DamageAmounts(10, 5);
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
 	}
 

@@ -10,11 +10,9 @@ public class BattleHandler : MonoBehaviour
 		return instance;
 	}
 	
-	//will be chosen by the player
-	[SerializeField]
-    private Transform prefabHero;
 	[SerializeField]
 	private Transform prefabEnemy;
+	private Transform prefabHero;
 	private CharacterBattle playerCharacterBattle;
 	private CharacterBattle enemyCharacterBattle;
 	
@@ -49,6 +47,8 @@ public class BattleHandler : MonoBehaviour
 
 	private void Start()
 	{
+		prefabHero = GlobalVariables.chosenHero;
+		GlobalVariables.ClearChosenHero();
 		playerCharacterBattle = SpawnHero();
 		enemyCharacterBattle = SpawnEnemy();
 		playerState = PlayerState.Ready;

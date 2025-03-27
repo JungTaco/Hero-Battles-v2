@@ -4,7 +4,9 @@ public class Character : MonoBehaviour
 {
 	[SerializeField]
 	private bool isPlayer;
-    private Animator anim;
+	[SerializeField]
+	private Sprite portrait;
+	private Animator anim;
     
     private static readonly int TrAttack = Animator.StringToHash("TrAttack");
     private static readonly int IsSliding = Animator.StringToHash("IsSliding");
@@ -13,6 +15,11 @@ public class Character : MonoBehaviour
     {
 	    return isPlayer;
     }
+
+	public Sprite GetPortrait()
+	{
+		return portrait;
+	}
     
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
