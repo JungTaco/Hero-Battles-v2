@@ -87,6 +87,18 @@ public class BattleHandler : MonoBehaviour
 		}
 	}
 
+	public void SpellAttack()
+	{
+		if (playerState == PlayerState.Ready)
+		{
+			playerCharacterBattle.SpellAttack(enemyCharacterBattle);
+		}
+		else
+		{
+			enemyCharacterBattle.SpellAttack(playerCharacterBattle);
+		}
+	}
+
 	private CharacterBattle SpawnHero()
 	{
 		Vector3 position = new Vector3(-2.5f, 0);

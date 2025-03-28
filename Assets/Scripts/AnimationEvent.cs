@@ -14,4 +14,9 @@ public class AnimationEvent : MonoBehaviour
     {
         Actions.OnAttackFinished?.Invoke(characterBattle);
     }
+
+	public void FinishSpellAttack()
+	{
+		Actions.OnSpellAttackFinished?.Invoke();
+	}
 }

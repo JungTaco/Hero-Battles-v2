@@ -42,4 +42,9 @@ public class Character : MonoBehaviour
 	{
 		anim.SetBool(IsSliding, true);
 	}
+
+	public void PlaySpellAttackAnimation()
+	{
+		Debug.Log("Spell attack anim");
+	}
 }

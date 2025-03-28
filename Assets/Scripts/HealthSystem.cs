@@ -39,7 +39,6 @@ public class HealthSystem
 			health = 0;
 		}
 
-		Debug.Log(health);
 		OnHealthChanged?.Invoke(this, EventArgs.Empty);
 
 		if (health <= 0)

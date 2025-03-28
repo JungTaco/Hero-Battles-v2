@@ -3,12 +3,19 @@ using UnityEngine;
 
 public class CharacterBattle : MonoBehaviour
 {
-    private Character character;
+	[SerializeField]
+	private DamagePopUpText prefabDamagePopUpText;
+	[SerializeField]
+	private Transform damagePopUpTextPos;
+    [SerializeField]
+    private Canvas canvas;
+	private Character character;
     private bool isSliding;
 	private Vector3 slideTargetPosition;
     private Action onSlideComplete;
     private HealthSystem healthSystem;
     private HPBar hpBar;
+
     private struct DamageAmounts
     {
         private int attackDamage;
@@ -57,18 +64,22 @@ public class CharacterBattle : MonoBehaviour
 	private void OnEnable()
 	{
         Actions.OnAttackFinished += SlideToOriginalPosition;
+        Actions.OnSpellAttackFinished += FinishTurn;
 	}
 
 	private void OnDisable()
 	{
 		Actions.OnAttackFinished -= SlideToOriginalPosition;
+		Actions.OnSpellAttackFinished -= FinishTurn;
 	}
 
     public void GetsDamaged(int damage)
     {
         healthSystem.GetsDamage(damage);
         hpBar.UpdateSliderValue(healthSystem.GetHealthPercent());
-    }
+		DamagePopUpText damagePopUpText = prefabDamagePopUpText.Create(damagePopUpTextPos.position, damage);
+		damagePopUpText.GetComponent<RectTransform>().SetParent(canvas.transform);
+	}
 
     public bool IsDead()
     {
@@ -92,7 +103,14 @@ public class CharacterBattle : MonoBehaviour
 		});
 	}
 
-    public void HideHPBar() 
+	public void SpellAttack(CharacterBattle target)
+    {
+        character.PlaySpellAttackAnimation();
+		target.GetsDamaged(damageAmounts.GetSpellDamage());
+	}
+
+
+	public void HideHPBar() 
     { 
         hpBar.gameObject.SetActive(false);
     }
