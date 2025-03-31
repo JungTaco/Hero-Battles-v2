@@ -17,6 +17,7 @@ public class CharacterBattle : MonoBehaviour
     private HPBar hpBar;
     private bool isShielded;
     private int healingAmount;
+    private AudioSource audioSource;
 
     private struct DamageAmounts
     {
@@ -55,6 +56,7 @@ public class CharacterBattle : MonoBehaviour
         healingAmount = 15;
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
         isShielded = false;
+        audioSource = GetComponentInChildren<AudioSource>();
 	}
 
     private void Update()
@@ -111,6 +113,7 @@ public class CharacterBattle : MonoBehaviour
             //arrived to target: stop sliding and attack
             isSliding = false;
             character.PlayAttackAnimation();
+            audioSource.Play();
             target.GetsDamaged(damageAmounts.GetAttackDamage());
 			//set target to original position
 			slideTargetPosition = startPosition;
