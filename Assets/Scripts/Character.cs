@@ -9,7 +9,8 @@ public class Character : MonoBehaviour
 	private Animator anim;
     
     private static readonly int TrAttack = Animator.StringToHash("TrAttack");
-    private static readonly int IsSliding = Animator.StringToHash("IsSliding");
+	private static readonly int TrSpellAttack = Animator.StringToHash("TrSpellAttack");
+	private static readonly int IsSliding = Animator.StringToHash("IsSliding");
 
     public bool GetIsPlayer()
     {
@@ -45,6 +46,6 @@ public class Character : MonoBehaviour
 
 	public void PlaySpellAttackAnimation()
 	{
-		Debug.Log("Spell attack anim");
+		anim.SetTrigger(TrSpellAttack);
 	}
 }

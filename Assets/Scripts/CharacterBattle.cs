@@ -134,7 +134,7 @@ public class CharacterBattle : MonoBehaviour
 
     private void SetSlideValues(Vector3 slideTargetPosition, Action onSlideComplete)
     {
-        this.slideTargetPosition = slideTargetPosition;
+		this.slideTargetPosition = slideTargetPosition;
         this.onSlideComplete = onSlideComplete;
         isSliding = true;
 	}
@@ -154,7 +154,6 @@ public class CharacterBattle : MonoBehaviour
 
     private void FinishTurn()
     {
-        onSlideComplete = null;
 		Actions.OnTurnFinished?.Invoke();
     }
 }
