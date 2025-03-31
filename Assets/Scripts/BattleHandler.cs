@@ -77,8 +77,9 @@ public class BattleHandler : MonoBehaviour
 
 	public void Attack()
 	{
-		if (playerState == PlayerState.Ready)
+		if (playerState == PlayerState.TakingAction)
 		{
+
 			playerCharacterBattle.Attack(enemyCharacterBattle);
 		}
 		else
@@ -89,13 +90,38 @@ public class BattleHandler : MonoBehaviour
 
 	public void SpellAttack()
 	{
-		if (playerState == PlayerState.Ready)
+		
+		if (playerState == PlayerState.TakingAction)
 		{
 			playerCharacterBattle.SpellAttack(enemyCharacterBattle);
 		}
 		else
 		{
 			enemyCharacterBattle.SpellAttack(playerCharacterBattle);
+		}
+	}
+
+	public void ShieldSelf()
+	{
+		if (playerState == PlayerState.TakingAction)
+		{
+			playerCharacterBattle.ShieldSelf();
+		}
+		else
+		{
+			enemyCharacterBattle.ShieldSelf();
+		}
+	}
+
+	public void Heal()
+	{
+		if (playerState == PlayerState.TakingAction)
+		{
+			playerCharacterBattle.Heal();
+		}
+		else
+		{
+			enemyCharacterBattle.Heal();
 		}
 	}
 

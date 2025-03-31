@@ -7,7 +7,6 @@ public class BattleMenuButton : MonoBehaviour
     protected Button Button;
 	protected BattleHandler battleHandler;
 
-
 	private void Awake()
     {
 		Button = GetComponent<Button>();

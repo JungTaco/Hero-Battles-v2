@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b13a2740e495c469b9e57dfd3361a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabDamagePopUpText: {fileID: 4701941756265627504, guid: 201bb2e9a4c3c324b82aa79cdb593e74, type: 3}
-  damagePopUpTextPos: {fileID: 3436954207436488847}
+  PrefabPopUpText: {fileID: 4701941756265627504, guid: 201bb2e9a4c3c324b82aa79cdb593e74, type: 3}
+  popUpTextPos: {fileID: 3436954207436488847}
   canvas: {fileID: 171320982050199049}
 --- !u!1 &4002677997683516755
 GameObject:
@@ -321,7 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3436954207436488847}
   m_Layer: 0
-  m_Name: DamagePopUpTextPos
+  m_Name: PopUpTextPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

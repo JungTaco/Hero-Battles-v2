@@ -2,10 +2,10 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class DamagePopUpText : MonoBehaviour
+public class PopUpText : MonoBehaviour
 {
     [SerializeField]
-    private Transform prefabDamagePopUpText;
+    private Transform prefabPopUpText;
     private TMP_Text text;
 	private float disappearTimer;
 	private Color textColor;
@@ -33,18 +33,22 @@ public class DamagePopUpText : MonoBehaviour
 		}
 	}
 
-	public DamagePopUpText Create(Vector3 position, int damageAmount)
+	public PopUpText Create(Vector3 position, int amount, bool isHealing)
 	{
-		Transform damagePopUpTransform = Instantiate(prefabDamagePopUpText, position, Quaternion.identity);
-		DamagePopUpText damagePopUpText = damagePopUpTransform.GetComponent<DamagePopUpText>();
-		damagePopUpText.Setup(damageAmount);
-		return damagePopUpText;
+		Transform PopUpTransform = Instantiate(prefabPopUpText, position, Quaternion.identity);
+		PopUpText PopUpText = PopUpTransform.GetComponent<PopUpText>();
+		PopUpText.Setup(amount, isHealing);
+		return PopUpText;
 	}
 
-	private void Setup(int damageAmount)
+	private void Setup(int amount, bool isHealing)
 	{
-		text.SetText(damageAmount.ToString());
+		text.SetText(amount.ToString());
 		disappearTimer = .5f;
-		textColor = text.color;
+		if (isHealing)
+		{
+			text.color = Color.green;
+		}
+		textColor = text.color;	
 	}
 }

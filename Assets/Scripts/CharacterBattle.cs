@@ -4,9 +4,9 @@ using UnityEngine;
 public class CharacterBattle : MonoBehaviour
 {
 	[SerializeField]
-	private DamagePopUpText prefabDamagePopUpText;
+	private PopUpText PrefabPopUpText;
 	[SerializeField]
-	private Transform damagePopUpTextPos;
+	private Transform popUpTextPos;
     [SerializeField]
     private Canvas canvas;
 	private Character character;
@@ -15,6 +15,8 @@ public class CharacterBattle : MonoBehaviour
     private Action onSlideComplete;
     private HealthSystem healthSystem;
     private HPBar hpBar;
+    private bool isShielded;
+    private int healingAmount;
 
     private struct DamageAmounts
     {
@@ -50,7 +52,9 @@ public class CharacterBattle : MonoBehaviour
 		healthSystem = new HealthSystem(100);
         //TO DO: set depending on what level and what class character is
 		damageAmounts = new DamageAmounts(10, 5);
+        healingAmount = 15;
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
+        isShielded = false;
 	}
 
     private void Update()
@@ -75,10 +79,20 @@ public class CharacterBattle : MonoBehaviour
 
     public void GetsDamaged(int damage)
     {
-        healthSystem.GetsDamage(damage);
+		int damageReceived;
+        if (isShielded)
+        {
+            damageReceived = 0;
+		}
+        else 
+        { 
+            damageReceived = damage; 
+        }
+        healthSystem.GetsDamage(damageReceived);
         hpBar.UpdateSliderValue(healthSystem.GetHealthPercent());
-		DamagePopUpText damagePopUpText = prefabDamagePopUpText.Create(damagePopUpTextPos.position, damage);
-		damagePopUpText.GetComponent<RectTransform>().SetParent(canvas.transform);
+		PopUpText popUpText = PrefabPopUpText.Create(popUpTextPos.position, damageReceived, false);
+		popUpText.GetComponent<RectTransform>().SetParent(canvas.transform);
+        isShielded = false;
 	}
 
     public bool IsDead()
@@ -109,11 +123,25 @@ public class CharacterBattle : MonoBehaviour
 		target.GetsDamaged(damageAmounts.GetSpellDamage());
 	}
 
-
 	public void HideHPBar() 
     { 
         hpBar.gameObject.SetActive(false);
     }
+
+    public void ShieldSelf()
+    {
+        isShielded = true;
+        FinishTurn(this);
+    }
+
+    public void Heal()
+    {
+        healthSystem.Heal(healingAmount);
+		//popup text - rename and change color in script
+		PopUpText popUpText = PrefabPopUpText.Create(popUpTextPos.position, healingAmount, true);
+		popUpText.GetComponent<RectTransform>().SetParent(canvas.transform);
+		FinishTurn(this);
+	}
     
     private void Slide()
     {
@@ -147,13 +175,16 @@ public class CharacterBattle : MonoBehaviour
 			SetSlideValues(slideTargetPosition, () =>
 			{
 				isSliding = false;
-                FinishTurn();
+                FinishTurn(characterBattle);
 			});
 		}
     }
 
-    private void FinishTurn()
+    private void FinishTurn(CharacterBattle characterBattle)
     {
-		Actions.OnTurnFinished?.Invoke();
+		if (ReferenceEquals(this, characterBattle))
+        {
+			Actions.OnTurnFinished?.Invoke();
+		}		
     }
 }

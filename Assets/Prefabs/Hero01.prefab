@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b13a2740e495c469b9e57dfd3361a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabDamagePopUpText: {fileID: 4701941756265627504, guid: 201bb2e9a4c3c324b82aa79cdb593e74, type: 3}
-  damagePopUpTextPos: {fileID: 8077563390825200005}
+  PrefabPopUpText: {fileID: 4701941756265627504, guid: 201bb2e9a4c3c324b82aa79cdb593e74, type: 3}
+  popUpTextPos: {fileID: 8077563390825200005}
   canvas: {fileID: 4713061696808441022}
 --- !u!1 &1827274558897985786
 GameObject:
@@ -75,7 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8077563390825200005}
   m_Layer: 0
-  m_Name: DamagePopUpTextPos
+  m_Name: PopUpTextPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +228,7 @@ Transform:
   m_GameObject: {fileID: 5639162102048214200}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
