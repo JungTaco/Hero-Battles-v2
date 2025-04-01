@@ -14,9 +14,12 @@ public class CharacterBattle : MonoBehaviour
 	private Vector3 slideTargetPosition;
     private Action onSlideComplete;
     private HealthSystem healthSystem;
+    private MagicSystem magicSystem;
     private HPBar hpBar;
-    private bool isShielded;
+	private MPBar mpBar;
+	private bool isShielded;
     private int healingAmount;
+    private int spellMpCost;
     private AudioSource audioSource;
 
     private struct DamageAmounts
@@ -51,11 +54,14 @@ public class CharacterBattle : MonoBehaviour
     {
         isSliding = false;
 		healthSystem = new HealthSystem(100);
-        //TO DO: set depending on what level and what class character is
+		magicSystem = new MagicSystem(100);
+		//TO DO: set depending on what level and what class character is
 		damageAmounts = new DamageAmounts(10, 5);
         healingAmount = 15;
+        spellMpCost = 70;
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
-        isShielded = false;
+		mpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<MPBar>();
+		isShielded = false;
         audioSource = GetComponentInChildren<AudioSource>();
 	}
 
@@ -124,12 +130,15 @@ public class CharacterBattle : MonoBehaviour
     {
         character.PlaySpellAttackAnimation();
 		target.GetsDamaged(damageAmounts.GetSpellDamage());
+        magicSystem.GetsUsed(spellMpCost);
+		mpBar.UpdateSliderValue(magicSystem.GetMpPercent());
 	}
 
-	public void HideHPBar() 
+	public void HideBars() 
     { 
         hpBar.gameObject.SetActive(false);
-    }
+		mpBar.gameObject.SetActive(false);
+	}
 
     public void ShieldSelf()
     {
@@ -145,6 +154,13 @@ public class CharacterBattle : MonoBehaviour
 		popUpText.GetComponent<RectTransform>().SetParent(canvas.transform);
 		FinishTurn(this);
 	}
+
+    public bool HasEnoughMp()
+    {
+        if (magicSystem.GetMpAmount() >= spellMpCost)
+            return true;
+        return false;
+    }
     
     private void Slide()
     {

@@ -27,12 +27,17 @@ public class BattleMenuButton : MonoBehaviour
         Actions.OnStateChanged -= ChangeButtonState;
     }
 
-    private void Enable()
+	public void ChangePlayerState()
+	{
+		battleHandler.ChangePlayerState(BattleHandler.PlayerState.TakingAction);
+	}
+
+	protected void Enable()
     {
         Button.interactable = true;
     }
 
-    private void Disable()
+	protected void Disable()
     {
         Button.interactable = false;
     }
@@ -48,9 +53,4 @@ public class BattleMenuButton : MonoBehaviour
             Disable();
         }
     }
-
-    public void ChangePlayerState()
-    {
-		battleHandler.ChangePlayerState(BattleHandler.PlayerState.TakingAction);
-	}
 }

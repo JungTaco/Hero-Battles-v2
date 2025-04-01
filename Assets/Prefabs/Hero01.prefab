@@ -576,7 +576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700900127917234269, guid: d5f5183254d82404aa4ecf9eaa00ef58, type: 3}
       propertyPath: m_Name
-      value: HPCanvas
+      value: BarCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

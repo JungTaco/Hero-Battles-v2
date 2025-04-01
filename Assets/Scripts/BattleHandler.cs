@@ -125,6 +125,18 @@ public class BattleHandler : MonoBehaviour
 		}
 	}
 
+	public bool CurrentCharacterHasEnoughMp()
+	{
+		if (playerState != PlayerState.Waiting)
+		{
+			return playerCharacterBattle.HasEnoughMp();
+		}
+		else
+		{
+			return enemyCharacterBattle.HasEnoughMp();
+		}
+	}
+
 	private CharacterBattle SpawnHero()
 	{
 		Vector3 position = new Vector3(-2.5f, 0);
@@ -143,8 +155,8 @@ public class BattleHandler : MonoBehaviour
 	{
 		if (IsBattleOver())
 		{
-			playerCharacterBattle.HideHPBar();
-			enemyCharacterBattle.HideHPBar();
+			playerCharacterBattle.HideBars();
+			enemyCharacterBattle.HideBars();
 			return;
 		}
 		if (playerState == PlayerState.TakingAction)

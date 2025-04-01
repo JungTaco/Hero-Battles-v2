@@ -7,4 +7,5 @@ public static class Actions
     public static Action<CharacterBattle> OnAttackFinished;
 	public static Action<CharacterBattle> OnSpellAttackFinished;
 	public static Action OnTurnFinished;
+	public static Action OnMpChanged;
 }
