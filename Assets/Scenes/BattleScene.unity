@@ -203,19 +203,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 166171173}
-        m_TargetAssemblyTypeName: BattleMenuButton, Assembly-CSharp
-        m_MethodName: ChangePlayerState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 762291878}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_TargetAssemblyTypeName: SpellAttackButton, Assembly-CSharp
         m_MethodName: SpellAttack
         m_Mode: 1
         m_Arguments:
@@ -791,7 +779,7 @@ GameObject:
   - component: {fileID: 929748882}
   - component: {fileID: 929748885}
   m_Layer: 5
-  m_Name: HPPotionButton
+  m_Name: HealButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -861,19 +849,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 929748885}
-        m_TargetAssemblyTypeName: BattleMenuButton, Assembly-CSharp
-        m_MethodName: ChangePlayerState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 762291878}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_TargetAssemblyTypeName: HealButton, Assembly-CSharp
         m_MethodName: Heal
         m_Mode: 1
         m_Arguments:
@@ -931,7 +907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 929748880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b3e824e4dc97a46a39e4a11578a647, type: 3}
+  m_Script: {fileID: 11500000, guid: f3db13a03c32b7e4dae8e6ec2a62bd37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &983962519
@@ -1027,7 +1003,7 @@ GameObject:
   - component: {fileID: 1549043327}
   - component: {fileID: 1549043330}
   m_Layer: 5
-  m_Name: DefendButton
+  m_Name: ShieldButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1097,20 +1073,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1549043330}
-        m_TargetAssemblyTypeName: BattleMenuButton, Assembly-CSharp
-        m_MethodName: ChangePlayerState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 762291878}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
-        m_MethodName: ShieldSelf
+        m_TargetAssemblyTypeName: ShieldButton, Assembly-CSharp
+        m_MethodName: Shield
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1167,7 +1131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1549043325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b3e824e4dc97a46a39e4a11578a647, type: 3}
+  m_Script: {fileID: 11500000, guid: a810d9526848c1845af826acc5f86165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1568769787
@@ -1706,19 +1670,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2073115599}
-        m_TargetAssemblyTypeName: BattleMenuButton, Assembly-CSharp
-        m_MethodName: ChangePlayerState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 762291878}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+        m_TargetAssemblyTypeName: AttackButton, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 1
         m_Arguments:
@@ -1776,7 +1728,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073115594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b3e824e4dc97a46a39e4a11578a647, type: 3}
+  m_Script: {fileID: 11500000, guid: 9735dd421f48b314381a7553dceb05ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807

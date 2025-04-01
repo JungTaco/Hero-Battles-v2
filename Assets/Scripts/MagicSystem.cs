@@ -15,7 +15,6 @@ public class MagicSystem
 	public void SetMpAmount(int mp)
 	{
 		this.mp = mp;
-		Actions.OnMpChanged?.Invoke();
 	}
 
 	public float GetMpPercent()

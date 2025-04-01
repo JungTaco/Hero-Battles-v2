@@ -58,7 +58,7 @@ public class CharacterBattle : MonoBehaviour
 		//TO DO: set depending on what level and what class character is
 		damageAmounts = new DamageAmounts(10, 5);
         healingAmount = 15;
-        spellMpCost = 70;
+        spellMpCost = 10;
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
 		mpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<MPBar>();
 		isShielded = false;

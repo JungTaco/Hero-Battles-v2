@@ -2,19 +2,31 @@ using UnityEngine;
 
 public class SpellAttackButton : BattleMenuButton
 {
-	private void OnEnable()
+	private void Start()
 	{
+		base.Start();
 		Actions.OnMpChanged += CheckHasEnoughMp;
 	}
 
-	private void OnDisable()
+	//private void OnEnable()
+	//{
+	//	Actions.OnMpChanged += CheckHasEnoughMp;
+	//}
+
+	//private void OnDisable()
+	//{
+	//	Actions.OnMpChanged -= CheckHasEnoughMp;
+	//}
+
+	public void SpellAttack()
 	{
-		Actions.OnMpChanged -= CheckHasEnoughMp;
+		ChangePlayerState();
+		battleHandler.SpellAttack();
 	}
 
 	private void CheckHasEnoughMp()
 	{
-		if (battleHandler.CurrentCharacterHasEnoughMp())
+		if (battleHandler.CurrentCharacterHasEnoughMp() && battleHandler.GetState() == BattleHandler.PlayerState.Waiting)
 			Enable();
 		else
 			Disable();

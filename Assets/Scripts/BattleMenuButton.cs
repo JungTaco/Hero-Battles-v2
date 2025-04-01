@@ -12,7 +12,7 @@ public class BattleMenuButton : MonoBehaviour
 		Button = GetComponent<Button>();
 	}
 
-	private void Start()
+	protected void Start()
 	{
 		battleHandler = BattleHandler.GetInstance();
 	}
@@ -42,7 +42,7 @@ public class BattleMenuButton : MonoBehaviour
         Button.interactable = false;
     }
 
-    private void ChangeButtonState(BattleHandler.PlayerState newState)
+    protected void ChangeButtonState(BattleHandler.PlayerState newState)
     {
         if (newState == BattleHandler.PlayerState.Ready)
         {
