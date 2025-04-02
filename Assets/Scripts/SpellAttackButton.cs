@@ -8,16 +8,6 @@ public class SpellAttackButton : BattleMenuButton
 		Actions.OnMpChanged += CheckHasEnoughMp;
 	}
 
-	//private void OnEnable()
-	//{
-	//	Actions.OnMpChanged += CheckHasEnoughMp;
-	//}
-
-	//private void OnDisable()
-	//{
-	//	Actions.OnMpChanged -= CheckHasEnoughMp;
-	//}
-
 	public void SpellAttack()
 	{
 		ChangePlayerState();
@@ -30,5 +20,15 @@ public class SpellAttackButton : BattleMenuButton
 			Enable();
 		else
 			Disable();
+	}
+
+	public override string GetTooltipHeader()
+	{
+		return "Spell attack";
+	}
+
+	public override string GetTooltipContent()
+	{
+		return "Spell attack damage: " + battleHandler.GetPlayer().GetBattleStats().GetSpellDamage();
 	}
 }

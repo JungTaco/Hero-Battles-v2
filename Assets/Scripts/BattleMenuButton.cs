@@ -32,6 +32,16 @@ public class BattleMenuButton : MonoBehaviour
 		battleHandler.ChangePlayerState(BattleHandler.PlayerState.TakingAction);
 	}
 
+    public virtual string GetTooltipHeader()
+    {
+        return null;
+    }
+
+	public virtual string GetTooltipContent()
+	{
+		return null;
+	}
+
 	protected void Enable()
     {
         Button.interactable = true;

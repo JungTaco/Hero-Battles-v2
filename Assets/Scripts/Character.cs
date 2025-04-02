@@ -27,12 +27,6 @@ public class Character : MonoBehaviour
     {	
 	    anim = GetComponentInChildren<Animator>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 	
 	public void PlayAttackAnimation()
 	{

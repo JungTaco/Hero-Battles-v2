@@ -7,4 +7,14 @@ public class HealButton : BattleMenuButton
 		ChangePlayerState();
 		battleHandler.Heal();
 	}
+
+	public override string GetTooltipHeader()
+	{
+		return "Heal";
+	}
+
+	public override string GetTooltipContent()
+	{
+		return "Heal amount: " + battleHandler.GetPlayer().GetBattleStats().GetHealingAmount();
+	}
 }

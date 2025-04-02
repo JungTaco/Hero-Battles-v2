@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class CharacterBattle : MonoBehaviour
@@ -18,47 +19,27 @@ public class CharacterBattle : MonoBehaviour
     private HPBar hpBar;
 	private MPBar mpBar;
 	private bool isShielded;
-    private int healingAmount;
-    private int spellMpCost;
     private AudioSource audioSource;
+    private BattleStats battleStats;
 
-    private struct DamageAmounts
+    public BattleStats GetBattleStats()
     {
-        private int attackDamage;
-        private int spellDamage;
-
-        public DamageAmounts(int attackDamage, int spellDamage)
-        {
-            this.attackDamage = attackDamage;
-            this.spellDamage = spellDamage;
-        }
-
-        public int GetAttackDamage()
-        {
-            return attackDamage;
-        }
-
-        public int GetSpellDamage()
-        {
-            return spellDamage;
-        }
-	}
-    private DamageAmounts damageAmounts;
+        return battleStats;
+    }
 
 	private void Awake()
     {
         character = GetComponent<Character>();
-    }
+		battleStats = new BattleStats(10, 5, 15, 10);
+	}
 
     private void Start()
     {
-        isSliding = false;
+		isSliding = false;
 		healthSystem = new HealthSystem(100);
 		magicSystem = new MagicSystem(100);
 		//TO DO: set depending on what level and what class character is
-		damageAmounts = new DamageAmounts(10, 5);
-        healingAmount = 15;
-        spellMpCost = 10;
+		
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
 		mpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<MPBar>();
 		isShielded = false;
@@ -120,7 +101,7 @@ public class CharacterBattle : MonoBehaviour
             isSliding = false;
             character.PlayAttackAnimation();
             audioSource.Play();
-            target.GetsDamaged(damageAmounts.GetAttackDamage());
+            target.GetsDamaged(battleStats.GetAttackDamage());
 			//set target to original position
 			slideTargetPosition = startPosition;
 		});
@@ -129,8 +110,8 @@ public class CharacterBattle : MonoBehaviour
 	public void SpellAttack(CharacterBattle target)
     {
         character.PlaySpellAttackAnimation();
-		target.GetsDamaged(damageAmounts.GetSpellDamage());
-        magicSystem.GetsUsed(spellMpCost);
+		target.GetsDamaged(battleStats.GetSpellDamage());
+        magicSystem.GetsUsed(battleStats.GetHealingAmount());
 		mpBar.UpdateSliderValue(magicSystem.GetMpPercent());
 	}
 
@@ -148,16 +129,16 @@ public class CharacterBattle : MonoBehaviour
 
     public void Heal()
     {
-        healthSystem.Heal(healingAmount);
+        healthSystem.Heal(battleStats.GetHealingAmount());
 		//popup text - rename and change color in script
-		PopUpText popUpText = PrefabPopUpText.Create(popUpTextPos.position, healingAmount, true);
+		PopUpText popUpText = PrefabPopUpText.Create(popUpTextPos.position, battleStats.GetHealingAmount(), true);
 		popUpText.GetComponent<RectTransform>().SetParent(canvas.transform);
 		FinishTurn(this);
 	}
 
     public bool HasEnoughMp()
     {
-        if (magicSystem.GetMpAmount() >= spellMpCost)
+        if (magicSystem.GetMpAmount() >= battleStats.GetSpellMpCost())
             return true;
         return false;
     }

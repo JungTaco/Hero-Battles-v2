@@ -54,11 +54,6 @@ public class BattleHandler : MonoBehaviour
 		playerState = PlayerState.Ready;
 	}
 
-	private void Update()
-	{
-
-	}
-
 	private void OnEnable()
 	{
 		Actions.OnTurnFinished += DecideNextTurn;
