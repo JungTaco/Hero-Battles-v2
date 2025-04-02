@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleMenuButton : MonoBehaviour
+public abstract class BattleMenuButton : MonoBehaviour
 {
     protected Button Button;
 	protected BattleHandler battleHandler;
@@ -32,15 +32,9 @@ public class BattleMenuButton : MonoBehaviour
 		battleHandler.ChangePlayerState(BattleHandler.PlayerState.TakingAction);
 	}
 
-    public virtual string GetTooltipHeader()
-    {
-        return null;
-    }
+    public abstract string GetTooltipHeader();
 
-	public virtual string GetTooltipContent()
-	{
-		return null;
-	}
+    public abstract string GetTooltipContent();
 
 	protected void Enable()
     {

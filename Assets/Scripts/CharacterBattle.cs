@@ -39,7 +39,6 @@ public class CharacterBattle : MonoBehaviour
 		healthSystem = new HealthSystem(100);
 		magicSystem = new MagicSystem(100);
 		//TO DO: set depending on what level and what class character is
-		
 		hpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<HPBar>();
 		mpBar = GetComponentInChildren<Canvas>().GetComponentInChildren<MPBar>();
 		isShielded = false;
