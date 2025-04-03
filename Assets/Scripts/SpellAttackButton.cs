@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpellAttackButton : BattleMenuButton
 {
-	private void Start()
+	private new void Start()
 	{
 		base.Start();
 		Actions.OnMpChanged += CheckHasEnoughMp;
